@@ -7,7 +7,7 @@ const search = ( props ) => {
     return (
 
         <div className="search">
-            <input type="text" id="term" placeholder="Pokemon name" required />
+            <input type="text" id="term" placeholder="Pokemon name" onChange={props.changed} required />
             <button type="button" id="submit" onClick={props.clicked} >GO</button>
         </div>
     )
