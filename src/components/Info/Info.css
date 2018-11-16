@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab");
+
+.info-box {
+    display: flex;
+    flex-direction: row;
+    background-color: #d5d5d5;
+    width: 650px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.info-box > img {
+    width: 325px;
+}
+
+.info-box > ul {
+    width: 270px;
+    list-style-type: none;
+    color: #6d7993;
+    font-size: 19px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.info-box li {
+    padding: 20px 10px 5px; 
+}
+
+.info-box li:not(:last-child) {
+    border-bottom: 1px solid #6d7993;
+}
+
+.mr {
+    margin-right: 20px;
+}
+
+.type {
+    display: inline-block;
+    width: 95px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    color: white;
+    border-radius: 13px;
+}
+
+.grass {
+    background-color: #69C23D;
+}
+
+.poison {
+    background-color: #923A92;
+}
+
+.fire {
+    background-color: #ED6D12;
+}
+
+.flying {
+    background-color: #8E6FEB;
+}
+
+.bug {
+    background-color: #97A51D;
+}
+
+.water {
+    background-color: #4578ED;
+}
+
+.normal {
+    background-color: #9C9C63;
+}
+
+.ground {
+    background-color: #DBB54D;
+}
+
+.rock {
+    background-color: #A48F32;
+}
+
+.dragon {
+    background-color: #5E1DF7;
+}
+
+.electric {
+    background-color: #F6C913;
+}
+
+.fairy {
+    background-color: #E87890;
+}
+
+.fighting {
+    background-color: #AE2A24;
+}
+
+.psychic {
+    background-color: #F73670;
+}
+
+.ghost {
+    background-color: #644E88;
+}
+
+.ice {
+    background-color: #7ECECE;
+}

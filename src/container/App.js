@@ -3,7 +3,9 @@ import axios from 'axios';
 import './App.css';
 
 import Search from '../components/Search/Search';
+import Info from '../components/Info/Info';
 import Loader from '../components/Loader/Loader';
+import Message from '../components/Message/Message';
 
 class App extends Component {
 	
@@ -14,23 +16,29 @@ class App extends Component {
 		this.state = {
 			pokemon : null,
 			name : null,
-			number : 0,
+			number : null,
 			spriteUrl : null,
 			types : [],
 			height : 0,
 			weight : 0,
 			isPokemonShowed : false,
 			loaderClass : 'hide',
-			message : null
+			message : 'No data.'
 		}
 		
 		this.handleChange = this.handleChange.bind(this);
-        this.showInfo = this.showInfo.bind(this);
+		this.showInfo = this.showInfo.bind(this);
+		this.capitalize = this.capitalize.bind(this);
         
 	}
 
 	handleChange = (event) => {
-		this.setState({pokemon: event.target.value});
+		let value = event.target.value.toLowerCase();
+		this.setState({pokemon: value});
+	}
+
+	capitalize(str){
+		return str.charAt(0).toUpperCase() + str.slice(1);
 	}
 	
 	showInfo = () => {
@@ -42,14 +50,25 @@ class App extends Component {
 		axios.get('https://pokeapi.co/api/v2/pokemon/' + this.state.pokemon + '/').then(response => {
 
 			const info = response.data;
+			let id;
+			if(info.id.toString().length === 1) {
+				id = "00" + info.id.toString();
+			} else if(info.id.toString().length === 2) {
+				id = "0" + info.id.toString();
+			} else {
+				id = info.id.toString();
+			}
+
+			let pokeHeight = info.height / 10;
+			let pokeWeight = info.weight / 10;
 
 			this.setState({
-				name : info.name,
-				number : info.id,
-				spriteUrl : info.sprites.front_default,
+				name : this.capitalize(info.name),
+				number : id,
+				spriteUrl : "https://assets.pokemon.com/assets/cms2/img/pokedex/full/" + id + ".png",
 				types : info.types,
-				height : info.height / 10,
-				weight : info.weight / 10,
+				height : pokeHeight.toFixed(2),
+				weight : pokeWeight.toFixed(2),
 				loaderClass : "hide",
 				isPokemonShowed : true
 			});
@@ -70,9 +89,15 @@ class App extends Component {
 		let data = null;
 
 		if(this.state.isPokemonShowed) {
-			data = <Info />
+			data = <Info 
+				name={this.state.name}
+				number={this.state.number}
+				spriteUrl={this.state.spriteUrl}
+				types={this.state.types}
+				height={this.state.height}
+				weight={this.state.weight} />
 		} else {
-			data = <Message />
+			data = <Message msg={this.state.message}/>
 		}
 
 
