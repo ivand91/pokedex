@@ -8,7 +8,7 @@ const search = ( props ) => {
 
         <div className="search">
             <input type="text" id="term" placeholder="Pokemon name" required />
-            <input type="submit" value="go" id="submit" />
+            <button type="button" id="submit" onClick={props.clicked} >GO</button>
         </div>
     )
 };

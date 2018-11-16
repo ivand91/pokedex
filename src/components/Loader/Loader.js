@@ -8,7 +8,7 @@ const loader = ( props ) => {
 
     return (
 
-        <img src={pokeball} className={classes.join(' ')} />
+        <img src={pokeball} className={classes.join(' ')} alt="Loader" />
     )
 };
 
