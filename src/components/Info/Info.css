@@ -127,6 +127,14 @@
     background-color: #7ECECE;
 }
 
+.dark {
+    background-color: #48382E;
+}
+
+.steel {
+    background-color: #666699;
+}
+
 @media only screen and (max-width: 420px) {
     
     .info-box {
