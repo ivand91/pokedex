@@ -21,6 +21,7 @@ class App extends Component {
 			types : [],
 			height : 0,
 			weight : 0,
+			about : null,
 			isPokemonShowed : false,
 			loaderClass : 'hide',
 			message : 'No data.'
@@ -69,10 +70,34 @@ class App extends Component {
 				types : info.types,
 				height : pokeHeight.toFixed(2),
 				weight : pokeWeight.toFixed(2),
-				loaderClass : "hide",
 				isPokemonShowed : true
 			});
-			
+
+		}).then(() => {
+
+			axios.get('https://pokeapi.co/api/v2/pokemon-species/' + this.state.pokemon + '/').then(res => {
+
+				let abouts = res.data.flavor_text_entries;
+
+				const flavorText = abouts.map((about) => {
+					if(about.language.name === "en" && about.version.name === "alpha-sapphire") {
+						return about.flavor_text;
+					} else {
+						return null;
+					}
+				});
+
+				this.setState({
+					about : flavorText,
+					loaderClass : 'hide'
+				});
+
+			}).catch(() => {
+				this.setState({
+					about : "No data about this Pokemon.",
+					loaderClass : 'hide'
+				});
+			});
 
 		}).catch(() => {
 			this.setState({
@@ -95,7 +120,8 @@ class App extends Component {
 				spriteUrl={this.state.spriteUrl}
 				types={this.state.types}
 				height={this.state.height}
-				weight={this.state.weight} />
+				weight={this.state.weight}
+				about={this.state.about} />
 		} else {
 			data = <Message msg={this.state.message}/>
 		}
